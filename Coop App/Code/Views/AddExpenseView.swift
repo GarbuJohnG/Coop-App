@@ -55,7 +55,6 @@ struct AddExpenseView: View {
                             category: category.rawValue,
                             amount: amount
                         )
-                        dismiss()
                     }
                     .disabled(!isValid)
                 }
