@@ -27,6 +27,7 @@
 		5E46DA3230B58653005074FB /* Coop App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coop App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E46DA3F30B58654005074FB /* Coop AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Coop AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E46DA4930B58654005074FB /* Coop AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Coop AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E46DBFC30B58AD7005074FB /* Coop-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Coop-App-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +70,7 @@
 		5E46DA2930B58653005074FB = {
 			isa = PBXGroup;
 			children = (
+				5E46DBFC30B58AD7005074FB /* Coop-App-Info.plist */,
 				5E46DA3430B58653005074FB /* Coop App */,
 				5E46DA4230B58654005074FB /* Coop AppTests */,
 				5E46DA4C30B58654005074FB /* Coop AppUITests */,
@@ -374,6 +376,7 @@
 				DEVELOPMENT_TEAM = 8UEW7N49G8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Coop-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -406,6 +409,7 @@
 				DEVELOPMENT_TEAM = 8UEW7N49G8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Coop-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var navigationStateManager = NavigationManager()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        NavigationView {
+            VStack {
+                if let currentView = navigationStateManager.viewStack.last {
+                    currentView
+                } else {
+                    TabPageController()
+                }
+            }
+            .navigationBarHidden(true)
+            .sheet(isPresented: $navigationStateManager.isSheetPresented, content: {
+                navigationStateManager.sheetContent
+            })
         }
-        .padding()
+        .environmentObject(navigationStateManager)
+        
     }
 }
 
