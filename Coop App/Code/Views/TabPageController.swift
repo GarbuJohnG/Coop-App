@@ -76,10 +76,7 @@ struct TabPageController: View {
             Text("Your expense has been recorded successfully.")
         }
     }
-
-    /// Reserves an empty slot in the tab bar so the real tabs make room for
-    /// the floating add button instead of sitting under it. Selecting it is
-    /// bounced back to the previous tab (see the `selectedTab` onChange).
+    
     private var spacerTabItem: some View {
         Color.clear
             .tabItem { EmptyView() }
