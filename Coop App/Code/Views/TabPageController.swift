@@ -35,7 +35,7 @@ struct TabPageController : View {
                 BudgetsView()
             }
             .tabItem {
-                Label("Budget", systemImage: "rectangle.grid.2x2")
+                Label("Budget", systemImage: "app.grid.2x2")
             }
             .tag(AppTab.budget)
             
@@ -48,8 +48,8 @@ struct TabPageController : View {
                 } icon: {
                     Image("add_button")
                         .resizable()
-                        .frame(width: 30, height: 30)
-                        .scaledToFit()
+                        .frame(width: 50, height: 10)
+                        .aspectRatio(contentMode: .fill)
                 }
             }
             .tag(AppTab.add)
@@ -58,7 +58,7 @@ struct TabPageController : View {
                 ReportsView()
             }
             .tabItem {
-                Label("Report", systemImage: "chart.line.text.clipboard")
+                Label("Report", systemImage: "document")
             }
             .tag(AppTab.report)
             
@@ -66,11 +66,16 @@ struct TabPageController : View {
                 AccountsView()
             }
             .tabItem {
-                Label("Account", systemImage: "person")
+                Label("Account", systemImage: "person.crop.circle")
             }
             .tag(AppTab.account)
         }
         .tint(Color("primaryColor"))
+        .onChange(of: viewModel.justAddedExpense) { _ , justAdded in
+            if justAdded {
+                selectedTab = .home
+            }
+        }
     }
 }
 

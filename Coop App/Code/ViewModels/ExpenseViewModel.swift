@@ -19,6 +19,7 @@ struct CategorySpending: Identifiable {
 final class ExpenseViewModel: ObservableObject {
     @Published private(set) var expenses: [ExpenseEntity] = []
     @Published var totalBalance: Double = 200000
+    @Published var justAddedExpense: Bool = false
 
     private let context: NSManagedObjectContext
     private static let totalBalanceKey = "com.coopapp.totalBalance"
@@ -46,6 +47,7 @@ final class ExpenseViewModel: ObservableObject {
         expense.amount = amount
         expense.date = Date()
         save()
+        justAddedExpense = true
     }
 
     private func save() {

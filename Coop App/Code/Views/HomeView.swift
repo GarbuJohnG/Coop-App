@@ -102,6 +102,8 @@ struct HomeView: View {
             .cornerRadius(20)
             .padding(.horizontal)
             
+            recentTransactionsSection
+            
             Spacer()
         }
     }
@@ -125,6 +127,52 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 16))
+    }
+    
+    private var recentTransactionsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            
+            Text("Recent Transactions")
+                .appFont(.productSansBold, size: 16)
+            
+            if viewModel.recentTransactions.isEmpty {
+                Text("No transactions yet")
+                    .appFont(.productSansRegular, size: 16)
+                    .foregroundStyle(.secondary)
+                
+            } else {
+                ForEach(viewModel.recentTransactions, id: \.id) { expense in
+                    HStack {
+                        
+                        VStack(alignment: .leading) {
+                            Text(expense.itemName)
+                                .appFont(.productSansBold, size: 15)
+                            
+                            Text(expense.category)
+                                .appFont(.productSansRegular, size: 11)
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .trailing) {
+                            Text(expense.amount, format: .currency(code: "KES"))
+                                .appFont(.productSansBold, size: 15)
+                            
+                            Text(expense.date, style: .date)
+                                .appFont(.productSansRegular, size: 11)
+                                .foregroundStyle(.secondary)
+                            
+                        }
+                    }
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 16))
+        .padding(.horizontal)
+        
     }
     
 }

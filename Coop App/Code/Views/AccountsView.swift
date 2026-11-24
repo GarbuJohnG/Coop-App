@@ -9,7 +9,16 @@ import SwiftUI
 
 struct AccountsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        Image("profile")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 200, height: 200)
+            .cornerRadius(100)
+        
+        Text("John Doe")
+            .appFont(.productSansBold, size: 16)
+        
     }
 }
 
