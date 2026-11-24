@@ -43,14 +43,7 @@ struct TabPageController : View {
                 AddExpenseView(viewModel: viewModel)
             }
             .tabItem {
-                Label {
-                    Text("")
-                } icon: {
-                    Image("add_button")
-                        .resizable()
-                        .frame(width: 50, height: 10)
-                        .aspectRatio(contentMode: .fill)
-                }
+                Label("Add", systemImage: "plus")
             }
             .tag(AppTab.add)
             
