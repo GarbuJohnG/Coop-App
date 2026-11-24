@@ -61,7 +61,7 @@ struct HomeView: View {
         VStack(spacing: 10) {
             
             HStack {
-                Text("\(String(format: "%.2f", viewModel.remainingBalance))")
+                Text("\(viewModel.remainingBalance.currencyString())")
                     .appFont(.productSansBold, size: 30)
                     .foregroundStyle(.white)
                 Text("Ksh.")
@@ -111,7 +111,7 @@ struct HomeView: View {
                         .appFont(.productSansRegular, size: 16)
                         .foregroundStyle(.secondary)
                     
-                    Text("Ksh. \(String(format: "%.2f", viewModel.totalMonthSpend))")
+                    Text("Ksh. \(viewModel.totalMonthSpend.currencyString())")
                         .appFont(.productSansBold, size: 16)
                         .foregroundStyle(.primary)
                     
@@ -135,7 +135,7 @@ struct HomeView: View {
             
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 200)
+        .frame(height: 260)
         .background(Color("backgroundColor"))
         .cornerRadius(20)
         .padding(.horizontal)

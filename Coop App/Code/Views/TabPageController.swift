@@ -5,8 +5,8 @@
 //  Created by John Gabriel on 24/11/2026.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 enum AppTab: Hashable {
     case home
@@ -14,61 +14,60 @@ enum AppTab: Hashable {
     case add
     case report
     case account
+
+    var title: String {
+        switch self {
+        case .home: return "Home"
+        case .budget: return "Budget"
+        case .add: return "Add"
+        case .report: return "Report"
+        case .account: return "Account"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .home: return "house"
+        case .budget: return "app.grid.2x2"
+        case .add: return "plus"
+        case .report: return "document"
+        case .account: return "person.crop.circle"
+        }
+    }
 }
 
-struct TabPageController : View {
-    
+struct TabPageController: View {
+
     @State private var selectedTab: AppTab = .home
     @EnvironmentObject private var viewModel: ExpenseViewModel
-    
+
     var body: some View {
         TabView(selection: $selectedTab) {
-            NavigationStack {
-                HomeView()
-            }
-            .tabItem {
-                Label("Home", systemImage: "house")
-            }
-            .tag(AppTab.home)
-            
-            NavigationStack {
-                BudgetsView()
-            }
-            .tabItem {
-                Label("Budget", systemImage: "app.grid.2x2")
-            }
-            .tag(AppTab.budget)
-            
-            NavigationStack {
-                AddExpenseView(viewModel: viewModel)
-            }
-            .tabItem {
-                Label("Add", systemImage: "plus")
-            }
-            .tag(AppTab.add)
-            
-            NavigationStack {
-                ReportsView()
-            }
-            .tabItem {
-                Label("Report", systemImage: "document")
-            }
-            .tag(AppTab.report)
-            
-            NavigationStack {
-                AccountsView()
-            }
-            .tabItem {
-                Label("Account", systemImage: "person.crop.circle")
-            }
-            .tag(AppTab.account)
+            tabItem(.home) { HomeView() }
+            tabItem(.budget) { BudgetsView() }
+            tabItem(.add) { AddExpenseView(viewModel: viewModel) }
+            tabItem(.report) { ReportsView() }
+            tabItem(.account) { AccountsView() }
         }
         .tint(Color("primaryColor"))
-        .onChange(of: viewModel.justAddedExpense) { _ , justAdded in
-            if justAdded {
-                selectedTab = .home
-            }
+        .onChange(of: viewModel.justAddedExpense) { _, justAdded in
+            guard justAdded else { return }
+            selectedTab = .home
         }
+    }
+
+    @ViewBuilder
+    private func tabItem<Content: View>(
+        _ tab: AppTab,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        NavigationStack {
+            content()
+        }
+        .tabItem {
+            Label(tab.title, systemImage: tab.systemImage)
+        }
+        .tag(tab)
     }
 }
 

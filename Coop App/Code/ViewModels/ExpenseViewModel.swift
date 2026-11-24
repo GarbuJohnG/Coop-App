@@ -79,9 +79,12 @@ final class ExpenseViewModel: ObservableObject {
     }
 
     var spendingByCategory: [CategorySpending] {
-        Dictionary(grouping: expenses, by: \.category)
-            .map { CategorySpending(category: $0.key, total: $0.value.reduce(0) { $0 + $1.amount }) }
-            .sorted { $0.total > $1.total }
+        let totals = Dictionary(grouping: expenses, by: \.category)
+            .mapValues { $0.reduce(0) { $0 + $1.amount } }
+
+        return ExpenseCategory.allCases.map { category in
+            CategorySpending(category: category.rawValue, total: totals[category.rawValue] ?? 0)
+        }
     }
 
     var recentTransactions: [ExpenseEntity] {
