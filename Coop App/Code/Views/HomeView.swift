@@ -17,95 +17,68 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing: 20) {
             
-            HStack(spacing: 10) {
-                
-                Image("profile")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(25)
-                
-                Text("Welcome back, John Doe 👋🏽")
-                    .appFont(.productSansBold, size: 16)
-                
-                Spacer()
-                
-                Button(action: {
-                    // Go to notifications
-                }, label: {
-                    Image(systemName: "bell.circle")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundStyle(Color("primaryColor"))
-                    
-                })
-                
-            }
-            .padding(.horizontal)
+            topBar
+
+            monthlyBudgetView
             
-            VStack(spacing: 10) {
-                
-                HStack {
-                    Text("\(String(format: "%.2f", viewModel.remainingBalance))")
-                        .appFont(.productSansBold, size: 30)
-                        .foregroundStyle(.white)
-                    Text("Ksh.")
-                        .appFont(.productSansRegular, size: 16)
-                        .foregroundStyle(.white)
-                }
-                
-                Text("remaining on your monthly budget")
-                    .appFont(.productSansRegular, size: 16)
-                    .foregroundStyle(.white)
-                
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: 200)
-            .background(LinearGradient(colors: [Color("primaryColor"), Color("secondaryColor")], startPoint: .leading, endPoint: .trailing))
-            .cornerRadius(20)
-            .padding(.horizontal)
-            
-            VStack(spacing: 10) {
-                HStack {
-                    
-                    VStack(alignment: .leading) {
-                        Text("Total spend this month")
-                            .appFont(.productSansRegular, size: 16)
-                            .foregroundStyle(.secondary)
-                        
-                        Text("Ksh. \(String(format: "%.2f", viewModel.totalMonthSpend))")
-                            .appFont(.productSansBold, size: 16)
-                            .foregroundStyle(.primary)
-                        
-                    }
-                    
-                    Spacer()
-                    
-                    Picker("Month", selection: $selectedMonth) {
-                        ForEach(MonthsOfYear.allCases) { month in
-                            Text(month.rawValue)
-                                .tag(month)
-                        }
-                    }
-                    .foregroundStyle(.primary)
-                }
-                .padding()
-                
-                categoriesSection
-                
-                Spacer()
-                
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: 200)
-            .background(Color("backgroundColor"))
-            .cornerRadius(20)
-            .padding(.horizontal)
+            spendView
             
             recentTransactionsSection
             
             Spacer()
         }
+    }
+    
+    private var topBar: some View {
+        HStack(spacing: 10) {
+            
+            Image("profile")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 50, height: 50)
+                .cornerRadius(25)
+            
+            Text("Welcome back, John Doe 👋🏽")
+                .appFont(.productSansBold, size: 16)
+            
+            Spacer()
+            
+            Button(action: {
+                // Go to notifications
+            }, label: {
+                Image(systemName: "bell.circle")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundStyle(Color("primaryColor"))
+                
+            })
+            
+        }
+        .padding(.horizontal)
+    }
+    
+    private var monthlyBudgetView: some View {
+        VStack(spacing: 10) {
+            
+            HStack {
+                Text("\(String(format: "%.2f", viewModel.remainingBalance))")
+                    .appFont(.productSansBold, size: 30)
+                    .foregroundStyle(.white)
+                Text("Ksh.")
+                    .appFont(.productSansRegular, size: 16)
+                    .foregroundStyle(.white)
+            }
+            
+            Text("remaining on your monthly budget")
+                .appFont(.productSansRegular, size: 16)
+                .foregroundStyle(.white)
+            
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 200)
+        .background(LinearGradient(colors: [Color("primaryColor"), Color("secondaryColor")], startPoint: .leading, endPoint: .trailing))
+        .cornerRadius(20)
+        .padding(.horizontal)
     }
     
     private var categoriesSection: some View {
@@ -127,6 +100,45 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 16))
+    }
+    
+    private var spendView: some View {
+        VStack(spacing: 10) {
+            HStack {
+                
+                VStack(alignment: .leading) {
+                    Text("Total spend this month")
+                        .appFont(.productSansRegular, size: 16)
+                        .foregroundStyle(.secondary)
+                    
+                    Text("Ksh. \(String(format: "%.2f", viewModel.totalMonthSpend))")
+                        .appFont(.productSansBold, size: 16)
+                        .foregroundStyle(.primary)
+                    
+                }
+                
+                Spacer()
+                
+                Picker("Month", selection: $selectedMonth) {
+                    ForEach(MonthsOfYear.allCases) { month in
+                        Text(month.rawValue)
+                            .tag(month)
+                    }
+                }
+                .foregroundStyle(.primary)
+            }
+            .padding()
+            
+            categoriesSection
+            
+            Spacer()
+            
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 200)
+        .background(Color("backgroundColor"))
+        .cornerRadius(20)
+        .padding(.horizontal)
     }
     
     private var recentTransactionsSection: some View {

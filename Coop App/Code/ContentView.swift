@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject private var viewModel: ExpenseViewModel
     @StateObject private var navigationStateManager = NavigationManager()
     
     var body: some View {
@@ -26,6 +28,7 @@ struct ContentView: View {
             })
         }
         .environmentObject(navigationStateManager)
+        .environmentObject(viewModel)
         
     }
 }
